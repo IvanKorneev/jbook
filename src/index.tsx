@@ -13,7 +13,7 @@ const App = () => {
     const startService = async () => {
         ref.current = await esbuild.startService({
             worker: true,
-            wasmURL: './esbuild.wasm'
+            wasmURL: 'https://unpkg.com/esbuild-wasm@0.8.27/esbuild.wasm'
         });
     };
 
@@ -39,6 +39,9 @@ const App = () => {
 
         setCode(result.outputFiles[0].text);
     };
+    const html = `
+    <script>${code}</script>
+    `;
     return (
         <div>
             <textarea value={input} onChange={e => setInput(e.target.value)}>
@@ -48,6 +51,7 @@ const App = () => {
                 <button onClick={onClick}>Click</button>
             </div>
             <pre>{code}</pre>
+            <iframe sandbox="allow-scripts" srcDoc={html}/>
         </div>
     );
 };
