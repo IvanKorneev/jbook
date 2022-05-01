@@ -8,7 +8,6 @@ const App = () => {
     const ref = useRef<any>();
     const iframe = useRef<any>();
     const [input, setInput] = useState('');
-    const [code, setCode] = useState('');
 
 
     const startService = async () => {
@@ -26,6 +25,7 @@ const App = () => {
         if (!ref.current) {
             return;
         }
+        iframe.current.srcdoc = html;
         const result = await ref.current.build({
             entryPoints: ['index.js'],
             bundle: true,
@@ -67,8 +67,7 @@ const App = () => {
             <div>
                 <button onClick={onClick}>Click</button>
             </div>
-            <pre>{code}</pre>
-            <iframe ref={iframe} sandbox="allow-scripts" srcDoc={html}/>
+            <iframe title="code preview" ref={iframe} sandbox="allow-scripts" srcDoc={html}/>
         </div>
     );
 };
