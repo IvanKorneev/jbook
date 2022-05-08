@@ -28,7 +28,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({initialValue, onChange}) => {
             semi: true,
             singleQuote: true
         });
-        editorRef.current.setValue(formatted)
+        editorRef.current.setValue(formatted);
     }
     return (
         <div>
